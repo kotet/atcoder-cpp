@@ -12,7 +12,7 @@
 using namespace std;
 typedef int64_t ll;
 typedef vector<ll> llv;
-typedef vector<ll> llvv;
+typedef vector<llv> llvv;
 
 // https://atcoder.jp/contests/abc129/tasks/abc129_f
 
