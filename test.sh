@@ -34,7 +34,8 @@ for file in $(ls input); do
 done
 
 for file in $(ls output); do
-    bat output/$file
+    echo "$file --------------------"
+    cat output/$file
 done
 
 rm -f app app.o
