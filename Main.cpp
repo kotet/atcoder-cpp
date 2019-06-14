@@ -2,7 +2,7 @@
 
 #define ALL(v) (v).begin(), (v).end()
 #define rep(i, n) for (ll i = 0, __##i##_length = (n); i < __##i##_length; i++)
-#define rep_reverse(i, n) for (ll i = (n)-1; 0 < i; i--)
+#define rep_reverse(i, n) for (ll i = (n)-1; 0 <= i; i--)
 #define FOR(i, from, to) for (ll i = (from), __##i##_end = (to); i < __##i##_end; i++)
 #define FOR_REVERSE(i, from, to) for (ll i = (to)-1, __##i##_end = (from); __##i##_end <= i; i--)
 #define foreach(e, v) for (const auto e : (v))
