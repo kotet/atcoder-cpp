@@ -14,67 +14,24 @@ typedef int64_t ll;
 typedef vector<ll> llv;
 typedef vector<llv> llvv;
 
-// https://atcoder.jp/contests/abc129/tasks/abc129_f
-
-llv mul(llv lhs, llv rhs, ll mod)
+ll gcd(ll a, ll b)
 {
-    llv dst(9, 0);
-    rep(i, 9)
-        rep(j, 3)
-    {
-        dst[i] += (lhs[3 * (i / 3) + j] * rhs[j * 3 + (i % 3)]) % mod;
-        dst[i] %= mod;
-    }
-    return dst;
+    return (a < b) ? gcd(b, a) : ((a % b) ? gcd(b, a % b) : b);
 }
 
-llv mul_vec_mat(llv vec, llv mat, ll mod)
+ll lcm(ll a, ll b)
 {
-    llv dst(3);
-    rep(i, 3)
-        dst[i] = ((vec[0] * mat[i] % mod) + (vec[1] * mat[i + 3] % mod) + (vec[2] * mat[i + 6] % mod)) % mod;
-    return dst;
-}
-
-llv powmod(llv m, ll n, ll mod)
-{
-    if (n == 0)
-        return llv{1, 0, 0, 0, 1, 0, 0, 0, 1};
-    if (n & 1)
-    {
-        llv tmp = powmod(m, n - 1, mod);
-        return mul(tmp, m, mod);
-    }
-    else
-    {
-        llv tmp = powmod(m, n / 2, mod);
-        return mul(tmp, tmp, mod);
-    }
+    return a * b / gcd(a, b);
 }
 
 int main()
 {
-    ll L, A, B, M;
-    cin >> L >> A >> B >> M;
-
-    llv mat{1, 1, 0, 0, 0, 0, B % M, 0, 1};
-    ll i = 0, d = 10;
-    llv state{A % M, 0, 1};
-    mat[4] = d;
-    while (i <= L)
-    {
-        ll nexti = (d - A + B - 1) / B;
-        if (nexti != 0 && i <= nexti && i <= L)
-        {
-            mat[4] = d % M;
-            llv dst = powmod(mat, min(nexti, L) - i, M);
-            i = nexti;
-            state = mul_vec_mat(state, dst, M);
-
-        }
-        d *= 10;
-    }
-    cout << state[1] << endl;
-
+    // https://atcoder.jp/contests/abc131/tasks/abc131_c
+    ll A, B, C, D;
+    cin >> A >> B >> C >> D;
+    ll c = B / C - (A - 1) / C;
+    ll d = B / D - (A - 1) / D;
+    ll cd = B / lcm(C, D) - (A - 1) / lcm(C, D);
+    cout << (B - A + 1) - (c + d - cd) << endl;
     return 0;
 }
